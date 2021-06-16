@@ -16,8 +16,9 @@ object ServerConnector {
 
         ServerRetrofit.server.getSingIn(username, password).enqueue(object : Callback<GetSingInRes> {
             override fun onResponse(call: Call<GetSingInRes>, response: Response<GetSingInRes>) {
-                val bod = response.body()!!
-                Log.d(TAG,"onResponse-getSingIn: ${response.body()?.msg}")
+                onResponse(response.body())
+//                val bod = response.body()!!
+//                Log.d(TAG,"onResponse-getSingIn: ${response.body()?.msg}")
             }
 
             override fun onFailure(call: Call<GetSingInRes>, t: Throwable) {
