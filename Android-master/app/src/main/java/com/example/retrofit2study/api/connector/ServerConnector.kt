@@ -12,7 +12,7 @@ object ServerConnector {
 
     const val TAG = "ServerConnector"
 
-    fun getSignIn(username: String, password: String){
+    fun getSignIn(username: String, password: String, onResponse: (GetSingInRes?) -> Unit){
 
         ServerRetrofit.server.getSingIn(username, password).enqueue(object : Callback<GetSingInRes> {
             override fun onResponse(call: Call<GetSingInRes>, response: Response<GetSingInRes>) {

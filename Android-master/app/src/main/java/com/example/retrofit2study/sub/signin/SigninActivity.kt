@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.retrofit2study.R
 import com.example.retrofit2study.api.connector.ServerConnector
 
@@ -31,7 +32,18 @@ class SigninActivity : AppCompatActivity() {
             val username = edtUsername.text.toString()
             val password = edtPassword.text.toString()
 
-            ServerConnector.getSignIn(username, password)
+            ServerConnector.getSignIn(username, password) {
+                if(it == null)
+                    showToast("서버 오류가 발생하였습니다.")
+                else if(it?.code != 0)
+                    showToast(it?.msg)
+                else
+                    showToast("로그인 성공")
+            }
         }
+    }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }
